@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Sidebar 01</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- ---------------------------------Font Link--------------------------------------------->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <!------------------------------------Icons Link-------------------------------------------->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar">
+    <div class="p-4 pt-5">
+      <img src="../assets/images/omnishore.png"  class="logo_omni" />
+      <a href="#" class="img logo rounded-circle" style="background-image: url(./assets/images/user.png);"></a><span>{{user.username}}</span>
+      <hr>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#"><i class="fa fa-dashboard" ></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="#pageSubmenu"aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs"></i>
+            Users</a>
+
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-building"></i> Business Units</a>
+        </li>
+        <li>
+          <a  routerLink="projet-list" routerLinkActive="active"><i class="fa fa-clipboard"> </i> Projects</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content" class="p-4 p-md-5 ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+          <i class="fa fa-bars"></i>
+          <span class="sr-only">Toggle Menu</span>
+        </button>
+
+        <div>
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">BU</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Project</a>
+            </li>
+            <li class="nav-item">
+              <button type="button" (click)="loadUsers()">Show users</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1>Projects</h1>
+    <div class="content bg-light">
+      <div class="inputs">
+        <table id="customers">
+          <tr>
+            <th>Projet Name</th>
+            <th>Code Code</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Budget</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
