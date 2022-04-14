@@ -3,7 +3,6 @@
   box-sizing: border-box; }
 /* ---------------------------------------ALL THE HTML-------------------------------------------- */
 html {
-  margin:-17px;
   font-family: sans-serif;
   line-height: 1.15;
 }
@@ -20,7 +19,7 @@ body {
 #sidebar {
   min-width: 300px;
   max-width: 300px;
-  height:101.1vh;
+  height:100vh;
   background: #FFF;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -138,7 +137,7 @@ input[type="date"] {
 }
 /* ---------------------------------------ALL THE Content of form-------------------------------------------- */
 .content{
-  padding:30px;
+  padding:10px;
 }
 /*------------------------Ul in navbar--------------------*/
 ul {
@@ -215,8 +214,7 @@ hr {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
+  margin-top: -7px;
   list-style: none; }
 
 .nav-link {
@@ -242,7 +240,7 @@ hr {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem; }
+  padding: 0rem 1rem; }
 .navbar > .container,
 .navbar > .container-fluid {
   display: -webkit-box;
@@ -276,6 +274,7 @@ hr {
   .navbar-expand-lg {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
+    display: block;
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
     -webkit-box-pack: start;
@@ -391,6 +390,12 @@ a[data-toggle="collapse"] {
 @media (max-width: 991.98px) {
   #sidebarCollapse span {
     display: none; } }
+@media (max-width: 500px) {
+  .form-cont{
+    width:100px;
+  }
+
+}
 /*--------------------------Content-----------------------------------*/
 #content {
   width: 100%;
@@ -430,6 +435,7 @@ a[data-toggle="collapse"] {
 }
 .content{
   padding:30px;
+  height:80vh;
 }
 
 .bg-light {

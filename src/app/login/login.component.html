@@ -19,6 +19,7 @@
     <div class="col-right">
       <div class="login-form">
         <h2 style="color: #212529">Login</h2>
+        <span *ngIf="err==1" style="color: #dc3545">username | password incorrect  </span>
         <form>
           <p>
             <label>Username<span>*</span></label>

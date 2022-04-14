@@ -7,7 +7,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './service/auth.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AuthGuard} from "./guards/auth.guard";
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthTokenInterceptors} from "./interceptors/auth.token.interceptor";
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     NoopAnimationsModule,
     HttpClientModule
   ],
-  providers: [AuthService,AuthGuard],
+  providers: [AuthService,AuthGuard,{provide: HTTP_INTERCEPTORS,useClass:AuthTokenInterceptors,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

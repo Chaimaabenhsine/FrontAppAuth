@@ -10,6 +10,8 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
+  err:number=0;
+  error:number=0;
 
   ngOnInit(): void {
   }
@@ -25,11 +27,12 @@ export class LoginComponent implements OnInit {
           if(value){
             this.router.navigate(["/dashboard"]);
           }else{
-            alert('failed');
+            alert("empty data");
           }
         },
         (error)=>{
-          alert('failed error');
+          this.err=1;
+          console.log(error.response);
         }
       )
   }

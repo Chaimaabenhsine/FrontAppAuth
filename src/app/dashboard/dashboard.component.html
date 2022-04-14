@@ -9,8 +9,93 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
   <!------------------------------------Icons Link-------------------------------------------->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
+<style>
+  body {
+    color: #404E67;
+    background: #F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .table-wrapper {
+    background: transparent;
+    height:70vh;
+  }
+  .table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+  }
+  .table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+  }
+  .table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+  }
+  .table-title .add-new i {
+    margin-right: 4px;
+  }
+  table.table {
+    table-layout: fixed;
+  }
+  table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+  }
+  table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  table.table th:last-child {
+    width: 100px;
+  }
+  table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    min-width: 24px;
+  }
+  table.table td a.add {
+    color: #27C46B;
+  }
+  table.table td a.edit {
+    color: #FFC107;
+  }
+  table.table td a.delete {
+    color: #E34724;
+  }
+  table.table td i {
+    font-size: 19px;
+  }
+  table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+  }
+  table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+  }
+  table.table .form-control.error {
+    border-color: #f50000;
+  }
+  table.table td .add {
+  }
+  #cont .open{
+    display: none;
+  }
 
+</style>
 <body>
 <div class="wrapper d-flex align-items-stretch">
   <nav id="sidebar">
@@ -23,7 +108,7 @@
           <a href="#"><i class="fa fa-dashboard" ></i> Dashboard</a>
         </li>
         <li>
-          <a href="#pageSubmenu"aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs"></i>
+          <a href="#pageSubmenu"aria-expanded="false" ><i class="fa fa-cogs"></i>
             Users</a>
 
         </li>
@@ -40,14 +125,14 @@
 
   <!-- Page Content  -->
   <div id="content" class="p-4 p-md-5 ">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <button type="button" id="sidebarCollapse" class="btn btn-primary">
           <i class="fa fa-bars"></i>
           <span class="sr-only">Toggle Menu</span>
         </button>
 
-        <div>
+<div>
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home</a>
@@ -61,29 +146,71 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Project</a>
             </li>
-            <li class="nav-item">
-              <button type="button" (click)="loadUsers()">Show users</button>
-            </li>
+
           </ul>
         </div>
+
       </div>
-    </nav>
-    <h1>Projects</h1>
+    </nav>-->
     <div class="content bg-light">
-      <div class="inputs">
-        <table id="customers">
-          <tr>
-            <th>Projet Name</th>
-            <th>Code Code</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Budget</th>
-          </tr>
-        </table>
+      <div class="container-lg">
+        <div class="table-responsive">
+          <div class="table-wrapper">
+            <div class="table-title">
+              <div class="row">
+                <div class="col-sm-8"><h2>Project <b>Details</b></h2></div>
+                <div class="col-sm-4">
+                  <!--<button type="button" class="btn btn-info add-new" id="show-more"><i class="fa fa-plus"></i> Add New</button>
+               --> </div>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+
+              <tr>
+                <th>Project code</th>
+                <th>Project name</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Budget</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr id="cont">
+                <td><input type="text" class="form-control" name="codeProjet" id="codeProjet" [(ngModel)]="projetForm.codeProjet" ></td>
+                <td><input type="text" class="form-control" name="nomProjet" id="nomProjet" [(ngModel)]="projetForm.nomProjet"></td>
+                <td><input type="date" style="width:145px" class="form-cont" name="debut" id="debut" [(ngModel)]="projetForm.debut"></td>
+                <td><input type="date" style="width:145px" class="form-cont" name="fin" id="fin" [(ngModel)]="projetForm.fin"></td>
+                <td><input type="text" class="form-control" name="budget" id="budget" [(ngModel)]="projetForm.budget"></td>
+                <td>
+                  <a class="add" title="Add" data-toggle="tooltip" (click)="postProject()"><i class="material-icons">&#xE03B;</i></a>
+                  <a class="delete" title="Delete" data-toggle="tooltip" (click)="clearSearch()"><i class="material-icons">&#xE872;</i></a>
+                </td>
+              </tr>
+              <tr *ngFor="let project of projects">
+                <td>{{project.codeProjet}}</td>
+                <td>{{project.nomProjet}}</td>
+                <td>{{project.debut}}</td>
+                <td>{{project.fin}}</td>
+                <td>{{project.budget}}</td>
+
+                <td>
+                  <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                  <a class="delete" title="Delete" (click)="onSubmit(project)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                </td>
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<!-- <script src="../../assets/example.js"></script>-->
 </body>
 </html>
 

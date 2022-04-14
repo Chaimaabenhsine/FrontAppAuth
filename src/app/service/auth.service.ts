@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
   userInfo = new BehaviorSubject(null);
   jwtHelper = new JwtHelperService();
-
+  token:any;
   constructor(private http: HttpClient) {
-    this.loadUserInfo();
   }
 
   loadUserInfo() {
@@ -24,6 +23,7 @@ export class AuthService {
       }
     }
   }
+
 
   userLogin(login: any): Observable<boolean> {
     if (login && login.username && login.password) {
@@ -46,11 +46,11 @@ export class AuthService {
   }
 
   getTodos():Observable<any>{
-    return this.http.get("http://localhost:8082/api/users");
+    return this.http.get("http://localhost:8082/api/users",{ withCredentials: true });
   }
 
 
-  /* callRefershToken(payload:any){
+   callRefershToken(payload:any){
     return this.http.post("http://localhost:8082/api/auth/refreshToken",payload);
-  } */
+  }
 }

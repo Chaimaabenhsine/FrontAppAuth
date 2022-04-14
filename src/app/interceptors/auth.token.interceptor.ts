@@ -12,42 +12,13 @@ export class AuthTokenInterceptors implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (req.url.indexOf('/refreshToken') > -1) {
+    if (req.url.includes("http://localhost:8082/api/auth/login")) {
       return next.handle(req);
-    }
-    const access_token = localStorage.getItem('access_token');
-    if (access_token) {
-      const expiration = localStorage.getItem('expiration');
-      if (Date.now() < Number(expiration) * 1000) {
-        const transformedReq = req.clone({
-          headers: req.headers.set('Authorization', `Bearer ${access_token}`),
-        });
-        return next.handle(transformedReq);
-      }
-      const payload = {
-        access_token: access_token,
-        refresh_token: localStorage.getItem('refresh_token'),
-      };
-      return this.authService.callRefershToken(payload).pipe(
-        switchMap((newTokens: any) => {
-          localStorage.setItem('access_token', newTokens.access_token);
-          localStorage.setItem('refresh_token', newTokens.refresh_token);
-          const decodedUser = this.jwtHelper.decodeToken(
-            newTokens.access_token
-          );
-          localStorage.setItem('expiration', decodedUser.exp);
-          this.authService.userInfo.next(decodedUser);
-          const transformedReq = req.clone({
-            headers: req.headers.set(
-              'Authorization',
-              `Bearer ${newTokens.access_token}`
-            ),
-          });
-          return next.handle(transformedReq);
-        })
-      );
-    } else {
-      return next.handle(req);
+    }else {
+      const token = localStorage.getItem("access_token");
+      const request = req.clone({setHeaders: {Authorization: `Bearer ${token}`}});
+      console.log(request);
+      return next.handle(request);
     }
   }
 }
